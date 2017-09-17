@@ -55,6 +55,9 @@ input:focus, textarea:focus{
     cursor: pointer;
     text-decoration: none;
 }
+.button:hover{
+    
+}
 
 .titulo{
     font-family: 'Montserrat', sans-serif;
@@ -114,12 +117,22 @@ input:focus, textarea:focus{
     display: inline-block;
     margin-left: 0;
 }
+.logotipo:hover{
+    transform: rotate(360deg);
+    transition: .3s
+}
 
 .guitarra {
     padding: 10px;
     margin: 10px 10px 30px 10px;
     border: 1px solid #1F313C;
     border-radius: 8px;
+    transition: .3s;
+}
+.guitarra:hover{
+    box-shadow: 10px 10px 10px #eae6e6;
+    transform: scale(1.1)
+
 }
 .guitarra ol {
     padding: 0;
