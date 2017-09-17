@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/invie.css">
     <link href="https://fonts.googleapis.com/css?family=Allerta|Montserrat:400,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <title>Invie  - Tus mejores guitarras</title>
 </head>
@@ -11,9 +12,10 @@
     <section id="portada" class="portada background"> <!-- Portada -->
         <header id="header" class="header contenedor"> <!-- Header -->
             <figure class="logotipo"> <!-- logo -->
-                <img src="images/invie.png" alt="Invie logotipo" width="186" height="60">
+                <img src="images/invie.png" srcset="images/invie.png 1x, images/invie2x.png 2x" alt="Invie logotipo" width="186" height="60">
             </figure>
-            <nav class="menu"> <!-- menu -->
+            <span class="burger-button icon-menu" id="burger-button"></span>
+            <nav class="menu" id="menu"> <!-- menu -->
                 <ul>
                     <li>
                         <a href="index.html">Home</a>
@@ -35,8 +37,16 @@
     </section> 
     <section id="guitarras" class="guitarras contenedor"> <!-- Guitarras -->
         <h2>Nuestras guitarras</h2><!-- titulo -->
+        <div class="video-demo-contenedor">
+            <div class="video-demo">
+                <div class="video-responsive-contenedor">
+                    <iframe class="video-responsive-src" width="560" height="315" src="https://www.youtube.com/embed/R1dW8M4EqYY" frameborder="0" allowfullscreen></iframe>
+                    
+                </div>
+            </div>
+        </div>
         <article class="guitarra"> <!-- guitarra 1 -->
-            <img class="derecha" src="images/invie-acustica.png" alt="Guitarra Invie Acustica" width="350">
+            <img class="derecha" data-src="images/invie-acustica.png|images/invie-acustica2x.png" alt="Guitarra Invie Acustica" width="350">
             <div class="contenedor-guitarra-a">
                 <h3 class="title-b">Invie Acústica</h3>
                 <ol>
@@ -47,7 +57,7 @@
             </div>
         </article>
         <article class="guitarra b"> <!-- guitarra 2 -->
-            <img class="izquierda" src="images/invie-classic.png" alt="Guitarra Invie Classic" width="350">
+            <img class="izquierda" data-src="images/invie-classic.png|images/invie-classic2x.png" alt="Guitarra Invie Classic" width="350">
             <div class="contenedor-guitarra-b">
                 <h3 class="title-b">Invie Classic</h3>
                 <ol>
@@ -61,7 +71,7 @@
     <footer class="footer">
         <div class="contenedor">
             <div class="contacto">
-                <img src="images/invie-white.png" alt="logotipo blanco">
+                <img data-src="images/invie-white.png|images/invie-white2x.png" alt="logotipo blanco">
                 <a href="tel:+5855555555"><strong>Telefono</strong> <span>555 55 555</span></a>
                 <a href="mailto:contacto@invie.com"><strong>E-mail</strong> <span>contacto@invie.com</span></a>
             </div>
@@ -102,5 +112,51 @@
             </form>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blazy/1.8.2/blazy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.7/hammer.min.js"></script>
+    <script>
+        var $burgerButton = document.getElementById('burger-button');
+        var $menu = document.getElementById('menu');
+
+        var consulta = window.matchMedia('(max-width: 500px)');
+        consulta.addListener(mediaQuery);
+
+        var bLazy = new Blazy({
+            selector: 'img'
+        });
+
+        var $body = document.body;
+        var gestos = new Hammer($body);
+        gestos.on('swiperight', showMenu);
+        gestos.on('swipeleft', hideMenu);
+
+
+        function mediaQuery() {
+            if (consulta.matches) {
+                $burgerButton.addEventListener('touchstart', toggleMenu);
+            }
+            else{
+                $burgerButton.removeEventListener('touchstart', toggleMenu);
+            }
+        }
+
+        function toggleMenu() {
+            $menu.classList.toggle('active');
+            $burgerButton.classList.toggle('icon-close');
+        }
+        function showMenu() {
+            $menu.classList.add('active');
+            $burgerButton.classList.add('icon-close');
+        }
+        function hideMenu() {
+            $menu.classList.remove('active');
+            $burgerButton.classList.remove('icon-close');
+        }
+
+        mediaQuery();
+
+       
+
+    </script>
 </body>
 </html>
